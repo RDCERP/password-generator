@@ -1,10 +1,11 @@
 var generateBtn = document.querySelector("#generate");
 
 // Created variables for the password criteria
-var randomNumber = Math.floor(Math.random() * 10) + 1;
+// var randomNumber = Math.floor(Math.random() * 10) + 1;
 var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var lowerCase = "abcdefghijklmnopqrstuvwxyz";
 var specialChar = "!@#$%^&*()_+~`|}{[]\:;?><,./-=";
+var numbers = "0123456789";
 
 
 function questions() {
@@ -16,7 +17,8 @@ function questions() {
     var upperCase = confirm("Click OK to confirm including uppercase characters");
     var lowerCase = confirm("Click OK to confirm including lowercase characters");
     var specialChar = confirm("Click OK to confirm including special characters");
-    var randomNumber = confirm("Click OK to confirm including numbers");
+    // var randomNumber = confirm("Click OK to confirm including numbers");
+    var numbers = confirm("Click OK to confirm including numbers")
     if (upperCase === false && lowerCase === false && specialChar === false && randomNumber === false) {
         alert("You must choose at least one parameter");
         return;
@@ -26,7 +28,8 @@ function questions() {
         upperCase: upperCase,
         lowerCase: lowerCase,
         specialChar: specialChar,
-        randomNumber: randomNumber
+        // randomNumber: randomNumber,
+        numbers: numbers
     }
     return passwordOptions;
 }
@@ -41,34 +44,37 @@ function generatePassword() {
             result.push(upperCase[i]);
         }
 
-    if (options.lowerCase) {
-        for (var i = 0; i < lowerCase.length; i++) {
-            result.push(lowerCase[i]);
+        if (options.lowerCase) {
+            for (var i = 0; i < lowerCase.length; i++) {
+                result.push(lowerCase[i]);
+            }
         }
-    }
 
-    if (options.specialChar) {
-        for (var i = 0; i < specialChar.length; i++) {
-            result.push(specialChar[i]);
+        if (options.specialChar) {
+            for (var i = 0; i < specialChar.length; i++) {
+                result.push(specialChar[i]);
+            }
         }
-    }
 
-    if (options.randomNumber) {
-        for (var i = 0; i < randomNumber.length; i++) {
-            result.push(randomNumber[i]);
+        // if (options.randomNumber) {
+        //     for (var i = 0; i < randomNumber.length; i++) {
+        //         result.push(randomNumber[i]);
+        //     }
+
+        if (options.numbers) {
+            for (var i = 0; i < numbers.length; i++) {
+                result.push(numbers[i]);
+            }
         }
+
+        }
+        console.log(result);
+        for (var i = 0; i < options.passwordLength; i++) {
+            completedPassword += result[Math.floor(Math.random() * result.length)];
+        }
+        console.log(completedPassword);
+        return completedPassword;
     }
-    console.log(result);
-    for (var i = 0; i < options.passwordLength; i++) {
-        completedPassword += result[Math.floor(Math.random() * result.length)];
-    }
-    console.log(completedPassword);
-    return completedPassword;
-}
-}
-
-
-
 
 // Write password to the #password input
 function writePassword() {
