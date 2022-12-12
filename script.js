@@ -1,4 +1,4 @@
-
+var generateBtn = document.querySelector("#generate");
 
 // Created variables for the password criteria
 var randomNumber = Math.floor(Math.random() * 10) + 1;
@@ -34,40 +34,39 @@ function questions() {
 function generatePassword() {
     var options = questions();
     var result = [];
-    var finalPassword = "";
+    var completedPassword = "";
 
     if (options.upperCase) {
-        possibleCharacters = possibleCharacters.concat(upperCase);
-        guaranteedCharacters.push(getRandom(upperCase));
-    }
+        for (var i = 0; i < upperCase.length; i++) {
+            result.push(upperCase[i]);
+        }
 
     if (options.lowerCase) {
-        possibleCharacters = possibleCharacters.concat(lowerCase);
-        guaranteedCharacters.push(getRandom(lowerCase));
+        for (var i = 0; i < lowerCase.length; i++) {
+            result.push(lowerCase[i]);
+        }
     }
 
     if (options.specialChar) {
-        possibleCharacters = possibleCharacters.concat(specialChar);
-        guaranteedCharacters.push(getRandom(specialChar));
+        for (var i = 0; i < specialChar.length; i++) {
+            result.push(specialChar[i]);
+        }
     }
 
     if (options.randomNumber) {
-        possibleCharacters = possibleCharacters.concat(randomNumber);
-        guaranteedCharacters.push(getRandom(randomNumber));
+        for (var i = 0; i < randomNumber.length; i++) {
+            result.push(randomNumber[i]);
+        }
     }
-
+    console.log(result);
     for (var i = 0; i < options.passwordLength; i++) {
-        var possibleCharacter = getRandom(possibleCharacters);
-
-        result.push(possibleCharacter);
+        completedPassword += result[Math.floor(Math.random() * result.length)];
     }
-
-    for (var i = 0; i < guaranteedCharacters.length; i++) {
-        result[i] = guaranteedCharacters[i];
-    }
-
-    return result.join('');
+    console.log(completedPassword);
+    return completedPassword;
 }
+}
+
 
 
 
